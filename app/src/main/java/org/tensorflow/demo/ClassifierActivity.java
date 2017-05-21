@@ -90,10 +90,6 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   private Matrix frameToCropTransform;
   private Matrix cropToFrameTransform;
 
-  private ResultsView resultsView;
-
-  private BorderedText borderedText;
-
   private long lastProcessingTimeMs;
 
   @Override
@@ -127,7 +123,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             INPUT_NAME,
             OUTPUT_NAME);
 
-    resultsView = (ResultsView) findViewById(R.id.results);
+    //resultsView = (ResultsView) findViewById(R.id.image);
     previewWidth = size.getWidth();
     previewHeight = size.getHeight();
 

@@ -27,25 +27,10 @@ import org.tensorflow.demo.Classifier.Recognition;
 import java.util.List;
 
 public class RecognitionScoreView extends View implements ResultsView {
-    private static final float TEXT_SIZE_DIP = 24;
     private List<Recognition> results;
-    private final float textSizePx;
-    private final Paint fgPaint;
-    private final Paint bgPaint;
 
     public RecognitionScoreView(final Context context, final AttributeSet set) {
         super(context, set);
-
-        textSizePx =
-                TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
-        fgPaint = new Paint();
-        fgPaint.setTextSize(textSizePx);
-        fgPaint.setColor(0xccffff00);
-
-        bgPaint = new Paint();
-        bgPaint.setColor(0xccff0000);
-
     }
 
     @Override
@@ -56,22 +41,14 @@ public class RecognitionScoreView extends View implements ResultsView {
 
     @Override
     public void onDraw(final Canvas canvas) {
-        final int x = 50;
-        int y = (int) (fgPaint.getTextSize() * 1.5f);
 
 
         if (results != null) {
             for (final Recognition recog : results) {
                 if (recog.getTitle().equals("hotdogs") && recog.getConfidence()>=0.6) {
-                    canvas.drawPaint(bgPaint);
-                    bgPaint.setColor(0xcc66FF00);
-                    canvas.drawText("Hotdog!" + "", x, y, fgPaint);
-                    canvas.drawText(recog.getTitle() + ": " + recog.getConfidence(), x, y, fgPaint);
 
-                    y += fgPaint.getTextSize() * 1.5f;
                 } else {
-                    bgPaint.setColor(0xccff0000);
-                    canvas.drawText("Not Hotdog!" + "", x, y, fgPaint);
+
                 }
             }
         }
