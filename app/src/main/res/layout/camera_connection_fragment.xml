@@ -46,4 +46,19 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true" />
 
+    <Button
+        android:id="@+id/share"
+        android:shadowColor="#1499A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:text="Share"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/sharebutton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
