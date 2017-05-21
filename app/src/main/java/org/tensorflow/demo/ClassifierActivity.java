@@ -96,8 +96,6 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
     private Matrix frameToCropTransform;
     private Matrix cropToFrameTransform;
 
-    private RecognitionScoreView recog;
-
     private long lastProcessingTimeMs;
 
     private List<Classifier.Recognition> results;
@@ -127,7 +125,6 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
                         INPUT_NAME,
                         OUTPUT_NAME);
 
-        //recog = (RecognitionScoreView) findViewById(R.id.results);
         previewWidth = size.getWidth();
         previewHeight = size.getHeight();
 
@@ -229,7 +226,6 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
                         lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
                         cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
-                        //recog.setResults(results);
                         setResults(results);
                         requestRender();
                         computing = false;
@@ -249,14 +245,8 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         });
     }
 
-//    public void setResults(final List<Classifier.Recognition> results){
-//        this.results = results;
-//        postInvalidate();
-//        setImageView();
-//    }
 
-
-    public void setImageView(){
+    public void setImageView() {
         ImageView hotdog = (ImageView) findViewById(R.id.hotdog);
         ImageView nothotdog = (ImageView) findViewById(R.id.nothotdog);
         hotdog.setVisibility(ImageView.INVISIBLE);
@@ -265,12 +255,11 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         Log.d(TAG, "running man");
         if (results != null) {
             for (final Classifier.Recognition recog : results) {
-                if (recog.getTitle().equals("hotdogs") && recog.getConfidence() > 0.6 ) {
+                if (recog.getTitle().equals("hotdogs") && recog.getConfidence() > 0.6) {
                     hotdog.setVisibility(ImageView.VISIBLE);
                     Log.d(TAG, "running hotdog");
 
                 } else {
-                    //hotdog.setVisibility(View.INVISIBLE);
                     nothotdog.setVisibility(ImageView.VISIBLE);
                     Log.d(TAG, "running nothotdog");
                 }
