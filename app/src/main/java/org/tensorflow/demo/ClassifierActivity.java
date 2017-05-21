@@ -58,15 +58,15 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   // --input_node_names="Mul" \
   // --output_node_names="final_result" \
   // --input_binary=true
-  private static final int INPUT_SIZE = 224;
-  private static final int IMAGE_MEAN = 117;
-  private static final float IMAGE_STD = 1;
-  private static final String INPUT_NAME = "input";
-  private static final String OUTPUT_NAME = "output";
+  private static final int INPUT_SIZE = 299;
+  private static final int IMAGE_MEAN = 128;
+  private static final float IMAGE_STD = 128;
+  private static final String INPUT_NAME = "Mul";
+  private static final String OUTPUT_NAME = "final_result";
 
-  private static final String MODEL_FILE = "file:///android_asset/tensorflow_inception_graph.pb";
+  private static final String MODEL_FILE = "file:///android_asset/rounded_graph_optimized.pb";
   private static final String LABEL_FILE =
-      "file:///android_asset/imagenet_comp_graph_label_strings.txt";
+      "file:///android_asset/retrained_labels.txt";
 
   private static final boolean SAVE_PREVIEW_BITMAP = false;
 
