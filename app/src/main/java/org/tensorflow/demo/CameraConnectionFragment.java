@@ -345,9 +345,7 @@ public class CameraConnectionFragment extends Fragment {
         Date now = new Date();
         android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
 
-
         try {
-
             if (Build.VERSION.SDK_INT >= 24) {
                 try {
                     Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
@@ -392,41 +390,6 @@ public class CameraConnectionFragment extends Fragment {
         Log.d(TAG, "openScreenshot: done");
 
     }
-
-//    public Bitmap takeScreenshot() {
-//        View rootView = findViewById(android.R.id.content).getRootView();
-//        rootView.setDrawingCacheEnabled(true);
-//        return rootView.getDrawingCache();
-//    }
-
-    public void saveBitmap(Bitmap bitmap) {
-        imagePath = new File(Environment.getExternalStorageDirectory() + "/screenshot.png");
-        FileOutputStream fos;
-
-        try {
-            fos = new FileOutputStream(imagePath);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            Log.e("GREC", e.getMessage(), e);
-        } catch (IOException e) {
-            Log.e("GREC", e.getMessage(), e);
-        }
-    }
-
-    private void shareIt() {
-        Uri uri = Uri.fromFile(imagePath);
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("image/*");
-        String shareBody = "My holy hotdog";
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "My Tweecher score");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-        sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
-
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
-    }
-
 
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
