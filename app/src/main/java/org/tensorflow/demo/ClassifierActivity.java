@@ -27,8 +27,10 @@ import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
 import android.os.Trace;
+import android.util.Log;
 import android.util.Size;
 import android.view.Display;
+import android.widget.ImageView;
 
 import java.util.Vector;
 import java.util.List;
@@ -37,8 +39,12 @@ import org.tensorflow.demo.OverlayView.DrawCallback;
 import org.tensorflow.demo.env.ImageUtils;
 import org.tensorflow.demo.env.Logger;
 
+
+import static android.content.ContentValues.TAG;
+
 public class ClassifierActivity extends CameraActivity implements OnImageAvailableListener {
     private static final Logger LOGGER = new Logger();
+
 
     /**
      * These are the settings for the original v1 Inception model. If you want to
@@ -90,9 +96,12 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
     private Matrix frameToCropTransform;
     private Matrix cropToFrameTransform;
 
-    private ResultsView resultsView;
+    private RecognitionScoreView recog;
 
     private long lastProcessingTimeMs;
+
+    private List<Classifier.Recognition> results;
+
 
     @Override
     protected int getLayoutId() {
@@ -118,7 +127,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
                         INPUT_NAME,
                         OUTPUT_NAME);
 
-        resultsView = (ResultsView) findViewById(R.id.results);
+        //recog = (RecognitionScoreView) findViewById(R.id.results);
         previewWidth = size.getWidth();
         previewHeight = size.getHeight();
 
@@ -220,7 +229,8 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
                         lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
                         cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
-                        resultsView.setResults(results);
+                        //recog.setResults(results);
+                        setResults(results);
                         requestRender();
                         computing = false;
                     }
@@ -228,6 +238,46 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
         Trace.endSection();
     }
+
+    public void setResults(final List<Classifier.Recognition> results) {
+        this.results = results;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setImageView();
+            }
+        });
+    }
+
+//    public void setResults(final List<Classifier.Recognition> results){
+//        this.results = results;
+//        postInvalidate();
+//        setImageView();
+//    }
+
+
+    public void setImageView(){
+        ImageView hotdog = (ImageView) findViewById(R.id.hotdog);
+        ImageView nothotdog = (ImageView) findViewById(R.id.nothotdog);
+        hotdog.setVisibility(ImageView.INVISIBLE);
+        nothotdog.setVisibility(ImageView.INVISIBLE);
+
+        Log.d(TAG, "running man");
+        if (results != null) {
+            for (final Classifier.Recognition recog : results) {
+                if (recog.getTitle().equals("hotdogs") && recog.getConfidence() > 0.6 ) {
+                    hotdog.setVisibility(ImageView.VISIBLE);
+                    Log.d(TAG, "running hotdog");
+
+                } else {
+                    //hotdog.setVisibility(View.INVISIBLE);
+                    nothotdog.setVisibility(ImageView.VISIBLE);
+                    Log.d(TAG, "running nothotdog");
+                }
+            }
+        }
+    }
+
 
     @Override
     public void onSetDebug(boolean debug) {

@@ -22,33 +22,61 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.view.View;
 
+
 import org.tensorflow.demo.Classifier.Recognition;
 
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-public class RecognitionScoreView extends View implements ResultsView {
-    ImageView hotdog;
-    ImageView nothotdog;
+public class RecognitionScoreView extends View {
+    ImageView hotdog = (ImageView) findViewById(R.id.hotdog);
+    ImageView nothotdog = (ImageView) findViewById(R.id.nothotdog);
     private List<Recognition> results;
-    boolean flag = true;
 
     public RecognitionScoreView(final Context context, final AttributeSet set) {
         super(context, set);
     }
 
-    @Override
     public void setResults(final List<Recognition> results) {
         this.results = results;
-        postInvalidate();
+
+        setImageViews();
+        //postInvalidate();
     }
 
     @Override
-    public void onDraw(final Canvas canvas) {
-    
-        hotdog = (ImageView) findViewById(R.id.hotdog);
-        nothotdog = (ImageView) findViewById(R.id.nothotdog);
+    public void onDraw(final Canvas canvas){
+
+    }
+
+    public synchronized void setImageViews(){
+        ImageView hotdog = (ImageView) findViewById(R.id.hotdog);
+        ImageView nothotdog = (ImageView) findViewById(R.id.nothotdog);
+        hotdog.setVisibility(ImageView.INVISIBLE);
+        nothotdog.setVisibility(ImageView.INVISIBLE);
+
+        Log.d(TAG, "running man");
+        if (results != null) {
+            for (final Classifier.Recognition recog : results) {
+                if (recog.getTitle().equals("hotdogs") && recog.getConfidence() > 0.6 ) {
+                    hotdog.setVisibility(ImageView.VISIBLE);
+                    Log.d(TAG, "running hotdog");
+
+                } else {
+                    //hotdog.setVisibility(View.INVISIBLE);
+                    nothotdog.setVisibility(ImageView.VISIBLE);
+                    Log.d(TAG, "running nothotdog");
+                }
+            }
+        }
+    }
+
+    public void onDraw11(final Canvas canvas) {
+        Log.d(TAG, "lalala");
+
+        ImageView hotdog = (ImageView) findViewById(R.id.hotdog);
+        ImageView nothotdog = (ImageView) findViewById(R.id.nothotdog);
         hotdog.setVisibility(ImageView.INVISIBLE);
         nothotdog.setVisibility(ImageView.INVISIBLE);
 
@@ -56,7 +84,6 @@ public class RecognitionScoreView extends View implements ResultsView {
 
 //        image.setVisibility(View.VISIBLE);
         if (results != null) {
-            flag = false;
             for (final Recognition recog : results) {
                 if (recog.getTitle().equals("hotdogs") && recog.getConfidence() > 0.6 ) {
                     hotdog.setVisibility(ImageView.VISIBLE);

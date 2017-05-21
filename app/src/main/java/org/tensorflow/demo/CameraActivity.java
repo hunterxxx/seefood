@@ -26,13 +26,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
+import android.util.Log;
 import android.util.Size;
 import android.view.KeyEvent;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 import java.nio.ByteBuffer;
+import java.util.List;
+
 import org.tensorflow.demo.env.Logger;
 import org.tensorflow.demo.R;
+
+import static android.content.ContentValues.TAG;
 
 public abstract class CameraActivity extends Activity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
@@ -46,6 +53,9 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
 
   private Handler handler;
   private HandlerThread handlerThread;
+
+  private List<Classifier.Recognition> results;
+
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -112,10 +122,11 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
   }
 
   protected synchronized void runInBackground(final Runnable r) {
-    if (handler != null) {
-      handler.post(r);
-    }
+      if (handler != null) {
+          handler.post(r);
+      }
   }
+
 
   @Override
   public void onRequestPermissionsResult(
