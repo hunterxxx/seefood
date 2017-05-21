@@ -80,16 +80,16 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
         } else {
             requestPermission();
         }
-
-        Button share = (Button) findViewById(R.id.share);
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bitmap bitmap = takeScreenshot();
-                saveBitmap(bitmap);
-                shareIt();
-            }
-        });
+//
+//        Button share = (Button) findViewById(R.id.share);
+//        share.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Bitmap bitmap = takeScreenshot();
+//                saveBitmap(bitmap);
+//                shareIt();
+//            }
+//        });
     }
 
     public Bitmap takeScreenshot() {

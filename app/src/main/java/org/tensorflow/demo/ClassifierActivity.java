@@ -252,16 +252,14 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         hotdog.setVisibility(ImageView.INVISIBLE);
         nothotdog.setVisibility(ImageView.INVISIBLE);
 
-        Log.d(TAG, "running man");
         if (results != null) {
             for (final Classifier.Recognition recog : results) {
                 if (recog.getTitle().equals("hotdogs") && recog.getConfidence() > 0.6) {
+                    nothotdog.setVisibility(ImageView.INVISIBLE);
                     hotdog.setVisibility(ImageView.VISIBLE);
-                    Log.d(TAG, "running hotdog");
-
                 } else {
+                    hotdog.setVisibility(ImageView.INVISIBLE);
                     nothotdog.setVisibility(ImageView.VISIBLE);
-                    Log.d(TAG, "running nothotdog");
                 }
             }
         }
