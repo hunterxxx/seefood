@@ -9,4 +9,8 @@ This is a project that I used TensorFlow Image Classifier sample to build it up 
 
 It has a trained hotdog classifier file in seefood/app/src/main/assets/rounded_graph_optimized.pb
 
+It is available on Google Play Store.
+
+https://play.google.com/store/apps/details?id=org.chatvme.com
+
 I am not planning to maintain it. If you want an updated version, build it yourself.
