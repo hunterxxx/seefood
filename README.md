@@ -5,7 +5,7 @@
 - Run it
 - That's all.
 
-This is a project that I used TensorFlow Image Classifier sample to build it up quickl.
+This is a project that I used TensorFlow Image Classifier sample to build it up quickly.
 
 It has a trained hotdog classifier file in seefood/app/src/main/assets/rounded_graph_optimized.pb
 
