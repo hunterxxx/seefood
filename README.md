@@ -1,5 +1,4 @@
-# SeeFood
-# TensorFlow (1.0.1) Image Classifier Gradle Standalone Port
+# SeeFood with TensorFlow (1.0.1) Image Classifier Gradle Standalone Port
 
 - Clone the project
 - Import it on Android Studio
