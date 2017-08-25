@@ -14,3 +14,7 @@ It is available on Google Play Store.
 https://play.google.com/store/apps/details?id=org.chatvme.com
 
 I am not planning to maintain it. If you want an updated version, build it yourself.
+
+# Lastly, Have fun!
+
+Please [Star](https://github.com/hunterxxx/seefood) this Project if you like it! [Follow](https://github.com/hunterxxx) would also be appreciated!
