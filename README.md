@@ -11,7 +11,8 @@ It has a trained hotdog classifier file in seefood/app/src/main/assets/rounded_g
 
 It is available on Google Play Store.
 
-https://play.google.com/store/apps/details?id=org.chatvme.com
+
+<a href="https://play.google.com/store/apps/details?id=org.chatvme.com"><img height="60px" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" /></a>
 
 I am not planning to maintain it. If you want an updated version, build it yourself.
 
